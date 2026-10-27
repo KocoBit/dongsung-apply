@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>동성여고로 오는 길 · 신청하기</title>
+<meta name="theme-color" content="#F0457E">
+<!--
+  학생용 모바일 페이지 (입학상담 · 진로체험 · Q&A · 학교 소개)
+  ▶ 고칠 곳은 아래 <script>의 "여기부터 수정" 부분만
+-->
+<style>
+@font-face{font-family:"DS";src:url(fonts/ds-400.woff) format("woff");font-weight:400;font-display:swap}
+@font-face{font-family:"DS";src:url(fonts/ds-700.woff) format("woff");font-weight:700;font-display:swap}
+@font-face{font-family:"DS";src:url(fonts/ds-900.woff) format("woff");font-weight:900;font-display:swap}
+:root{--pink:#F0457E;--pink2:#FFE3EE;--plum:#3A1E52;--ink:#1E1828;--ink2:#4A4258;--mute:#8A8296;--line:#ECE4EF;--bg:#FBF7F9;--card:#FFFFFF;
+  --fin:#2E5BFF;--tou:#FF7A1A;--hea:#F0457E;--spo:#0FA968}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{font-family:"DS","Malgun Gothic","Apple SD Gothic Neo",sans-serif;background:var(--bg);color:var(--ink);word-break:keep-all;-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;border:0;background:none}
+.wrap{max-width:560px;margin:0 auto;padding:0 18px}
+
+/* 머리 */
+.hero{position:relative;overflow:hidden;background:radial-gradient(ellipse at 80% 0%,#FFD6E6 0,transparent 55%),linear-gradient(180deg,#FFF0F5,#FBF7F9);padding:22px 0 18px}
+.hero .wrap{position:relative}
+.logo{height:34px;display:block}
+.hero h1{margin-top:22px;font-size:30px;font-weight:900;letter-spacing:-1.2px;line-height:1.25}
+.hero h1 em{font-style:normal;color:var(--pink)}
+.hero p{margin-top:8px;font-size:15px;font-weight:700;color:var(--ink2);line-height:1.5}
+.hero .chr{position:absolute;right:4px;bottom:-30px;height:200px;pointer-events:none;-webkit-mask-image:linear-gradient(180deg,#000 70%,transparent);mask-image:linear-gradient(180deg,#000 70%,transparent)}
+.hero .copy{max-width:calc(100% - 120px)}
+.cd{margin-top:16px;display:inline-flex;align-items:center;gap:10px;padding:10px 16px;border-radius:999px;background:#fff;border:2px solid #F9C6D9;box-shadow:0 8px 20px -12px rgba(240,69,126,.6)}
+.cd small{font-size:13px;font-weight:700;color:#8A5A72}
+.cd b{font-size:19px;font-weight:900;color:var(--pink);font-variant-numeric:tabular-nums}
+
+/* 탭 */
+.tabs{position:sticky;top:0;z-index:20;background:rgba(251,247,249,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.tabs .wrap{display:flex;gap:6px;padding-top:10px;padding-bottom:10px;overflow-x:auto;scrollbar-width:none}
+.tabs .wrap::-webkit-scrollbar{display:none}
+.tab{flex:none;height:42px;padding:0 16px;border-radius:21px;font-size:15px;font-weight:900;color:var(--ink2);background:#fff;border:1.5px solid var(--line);transition:all .2s}
+.tab.on{background:var(--pink);border-color:var(--pink);color:#fff;box-shadow:0 8px 18px -10px rgba(240,69,126,.8)}
+.pane{display:none;padding:22px 0 60px;animation:fin .35s ease}
+.pane.on{display:block}
+@keyframes fin{from{opacity:0;transform:translateY(8px)}}
+h2{font-size:23px;font-weight:900;letter-spacing:-.8px}
+h2+p,.lead{margin-top:6px;font-size:14.5px;color:var(--ink2);font-weight:700;line-height:1.55}
+
+/* 폼 */
+.form{margin-top:18px;display:flex;flex-direction:column;gap:14px}
+.f>label,.f>.lb{display:block;font-size:14px;font-weight:900;margin-bottom:7px}
+.f>label i,.f>.lb i{font-style:normal;color:var(--pink);margin-left:2px}
+.f>label small,.f>.lb small{font-weight:700;color:var(--mute);margin-left:6px;font-size:12.5px}
+.in{width:100%;height:50px;padding:0 14px;border-radius:14px;border:1.5px solid var(--line);background:#fff;font-size:16px;font-weight:700;outline:none;transition:border-color .2s,box-shadow .2s;appearance:none;-webkit-appearance:none}
+textarea.in{height:auto;min-height:96px;padding:12px 14px;line-height:1.5;resize:vertical}
+select.in{background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9'%3E%3Cpath d='M1 1l6 6 6-6' stroke='%238A8296' stroke-width='2' fill='none'/%3E%3C/svg%3E") no-repeat right 14px center;padding-right:38px}
+.in:focus{border-color:var(--pink);box-shadow:0 0 0 4px rgba(240,69,126,.12)}
+.in.err{border-color:#E5484D;box-shadow:0 0 0 4px rgba(229,72,77,.1)}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.tip{margin-top:7px;font-size:12.5px;font-weight:700;color:#B23A72;background:var(--pink2);padding:8px 11px;border-radius:10px;line-height:1.45}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{position:relative;display:flex;align-items:center;gap:10px;min-height:50px;padding:10px 14px;border-radius:14px;border:1.5px solid var(--line);background:#fff;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s}
+.opt input{position:absolute;opacity:0;pointer-events:none}
+.opt .dot{flex:none;width:20px;height:20px;border-radius:50%;border:2px solid #CFC3D6;transition:all .2s}
+.opt.chk .dot{border-radius:6px}
+.opt:has(input:checked){border-color:var(--pink);background:#FFF5F9;color:var(--plum)}
+.opt:has(input:checked) .dot{border:6px solid var(--pink)}
+.opt.chk:has(input:checked) .dot{border:0;background:var(--pink) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='10'%3E%3Cpath d='M1 5l3.5 3.5L11 1' stroke='white' stroke-width='2.2' fill='none'/%3E%3C/svg%3E") no-repeat center}
+.chips{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.chips .opt{min-height:46px;font-size:14px}
+.chips .opt i{flex:none;width:9px;height:9px;border-radius:50%;background:var(--c)}
+.agree{border-radius:14px;background:#fff;border:1.5px solid var(--line);overflow:hidden}
+.agree .opt{border:0;border-radius:0}
+.agree details{border-top:1px solid var(--line);font-size:12.5px;color:var(--ink2);line-height:1.6}
+.agree summary{padding:9px 14px;font-weight:900;color:var(--mute);cursor:pointer;list-style:none}
+.agree summary::-webkit-details-marker{display:none}
+.agree summary:after{content:" ▾"}
+.agree dl{padding:0 14px 12px;display:grid;grid-template-columns:auto 1fr;gap:4px 10px}
+.agree dt{font-weight:900;color:var(--ink)}
+.go{margin-top:6px;height:56px;border-radius:16px;background:var(--pink);color:#fff;font-size:17px;font-weight:900;box-shadow:0 14px 26px -14px rgba(240,69,126,.9);transition:transform .15s,opacity .2s}
+.go:active{transform:scale(.98)}
+.go[disabled]{opacity:.55}
+.msg{min-height:20px;font-size:13.5px;font-weight:900;color:#E5484D;text-align:center}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+
+/* 완료 */
+.done{display:none;margin-top:22px;padding:30px 20px;border-radius:22px;background:#fff;border:1.5px solid var(--line);text-align:center}
+.done.on{display:block;animation:pop .45s cubic-bezier(.3,1.5,.5,1)}
+@keyframes pop{from{transform:scale(.92);opacity:0}}
+.done img{height:150px}
+.done h3{margin-top:10px;font-size:22px;font-weight:900}
+.done p{margin-top:6px;font-size:14.5px;font-weight:700;color:var(--ink2);line-height:1.55}
+.done button{margin-top:18px;height:50px;padding:0 22px;border-radius:25px;background:var(--plum);color:#fff;font-size:15px;font-weight:900}
+
+/* 진로체험 일정 */
+.rounds{margin-top:16px;display:flex;flex-direction:column;gap:8px}
+.rd{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;background:#fff;border:1.5px solid var(--line)}
+.rd b{flex:none;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--pink2);color:var(--pink);font-size:15px;font-weight:900}
+.rd span{font-size:15px;font-weight:900}
+.rd small{display:block;margin-top:2px;font-size:12.5px;font-weight:700;color:var(--mute)}
+.rd em{margin-left:auto;font-style:normal;font-size:12.5px;font-weight:900;color:#fff;background:var(--pink);padding:4px 10px;border-radius:12px}
+.rd.past{opacity:.45}
+.rd.past em{background:#B9B1C2}
+
+/* Q&A */
+.qa-box{margin-top:16px;position:relative;height:430px;overflow:hidden;border-radius:20px;background:#fff;border:1.5px solid var(--line);-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 7%,#000 93%,transparent);mask-image:linear-gradient(180deg,transparent 0,#000 7%,#000 93%,transparent)}
+.qa-in{padding:14px;display:flex;flex-direction:column;gap:12px}
+.qa-in.roll{animation:roll var(--dur,40s) linear infinite}
+.qa-box:hover .qa-in.roll,.qa-box.hold .qa-in.roll{animation-play-state:paused}
+@keyframes roll{to{transform:translateY(-50%)}}
+.qa{border-radius:16px;background:var(--bg);padding:13px 14px}
+.qa .w{font-size:12px;font-weight:900;color:var(--mute)}
+.qa .q{margin-top:4px;font-size:15px;font-weight:900;line-height:1.45}
+.qa .q:before{content:"Q.";color:var(--pink);margin-right:5px}
+.qa .a{margin-top:8px;font-size:14px;font-weight:700;color:var(--ink2);line-height:1.55;padding-left:12px;border-left:3px solid #F9C6D9}
+.qa .a:before{content:"A. ";font-weight:900;color:var(--plum)}
+.qa-empty{height:100%;display:grid;place-items:center;text-align:center;font-size:14px;font-weight:700;color:var(--mute);padding:20px;line-height:1.6}
+.qa-hint{margin-top:8px;font-size:12.5px;font-weight:700;color:var(--mute);text-align:center}
+.sec2{margin-top:28px;padding-top:24px;border-top:1.5px dashed var(--line)}
+
+/* 학교 소개 */
+.depts{margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.dp{padding:16px 14px;border-radius:18px;background:#fff;border:1.5px solid var(--line);position:relative;overflow:hidden}
+.dp:before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--c)}
+.dp b{display:block;font-size:16px;font-weight:900}
+.dp span{display:block;margin-top:5px;font-size:13px;font-weight:700;color:var(--ink2);line-height:1.45}
+.facts{margin-top:14px;display:flex;flex-direction:column;gap:8px}
+.fact{padding:14px 16px;border-radius:16px;background:#fff;border:1.5px solid var(--line);font-size:14.5px;font-weight:700;line-height:1.5}
+.fact b{color:var(--pink)}
+.insta{margin-top:16px;display:flex;align-items:center;justify-content:center;gap:10px;height:54px;border-radius:16px;background:linear-gradient(90deg,#F58529,#DD2A7B 50%,#8134AF);color:#fff;font-size:16px;font-weight:900;text-decoration:none}
+.gallery{margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.gallery img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:12px;display:block}
+.foot{padding:26px 0 40px;text-align:center;font-size:12px;color:var(--mute);font-weight:700;line-height:1.6}
+
+/* 교실 화면(현장 신청)에서 열었을 때 */
+body.kiosk .hero{display:none}
+body.kiosk .tabs [data-tab="about"]{display:none}
+body.kiosk .kbar{display:flex}
+.kbar{display:none;align-items:center;gap:10px;padding:12px 18px;background:var(--plum);color:#fff;font-size:13.5px;font-weight:700;line-height:1.45}
+.kbar b{flex:none;padding:4px 10px;border-radius:10px;background:var(--pink);color:#fff!important}
+.kbar b{font-weight:900;color:#FFB8D2}
+
+.qtick{margin:14px 0 2px;width:100%;height:58px;display:flex;align-items:center;gap:12px;padding:0 14px;border-radius:16px;background:#fff;border:1.5px solid #F7CFE0;box-shadow:0 10px 22px -16px rgba(240,69,126,.7);text-align:left;overflow:hidden}
+.qtick b{flex:none;font-size:12px;font-weight:900;color:#fff;background:var(--pink);padding:5px 9px;border-radius:9px;position:relative}
+.qtick b:before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:#fff;margin-right:5px;vertical-align:1px;animation:blink 1.4s infinite}
+@keyframes blink{50%{opacity:.25}}
+.qt-in{position:relative;flex:1;height:40px;overflow:hidden}
+.qt-in>span{position:absolute;left:0;right:0;top:0;height:40px;display:flex;flex-direction:column;justify-content:center;font-size:14px;font-weight:900;line-height:1.3;white-space:nowrap;animation:qtin .5s cubic-bezier(.2,.8,.2,1)}
+.qt-in>span i{font-style:normal;font-weight:700;font-size:12.5px;color:var(--ink2);overflow:hidden;text-overflow:ellipsis}
+.qt-in>span em{font-style:normal;overflow:hidden;text-overflow:ellipsis}
+.qt-in>span em:before{content:"Q. ";color:var(--pink)}
+.qt-in>span i:before{content:"A. ";font-weight:900;color:var(--plum)}
+@keyframes qtin{from{transform:translateY(100%);opacity:0}}
+body.kiosk .qtick{display:none}
+
+/* 학교 검색 */
+.f.sch{position:relative}
+.f.sch .in{padding-right:44px}
+.f.sch .ok{position:absolute;right:14px;top:38px;width:22px;height:22px;border-radius:50%;background:#1FAE6B;color:#fff;font-size:13px;font-weight:900;display:none;place-items:center}
+.f.sch.picked .ok{display:grid}
+.f.sch.picked .in{border-color:#1FAE6B}
+.sch-gu{margin-top:6px;font-size:13px;font-weight:700;color:var(--mute);min-height:0}
+.ac{position:absolute;left:0;right:0;top:calc(100% - 2px);z-index:20;background:#fff;border:1.5px solid var(--pink);border-radius:14px;box-shadow:0 18px 34px -16px rgba(58,30,82,.45);overflow:hidden;display:none;max-height:330px;overflow-y:auto}
+.ac.on{display:block}
+.ac button{display:flex;width:100%;align-items:center;justify-content:space-between;gap:10px;padding:13px 14px;border:0;border-bottom:1px solid var(--line);background:#fff;text-align:left;font-size:16px;font-weight:700;color:var(--ink)}
+.ac button:last-child{border-bottom:0}
+.ac button b{color:var(--pink);font-weight:900}
+.ac button small{flex:none;font-size:12.5px;font-weight:700;color:var(--mute);background:var(--bg);padding:3px 8px;border-radius:8px}
+.ac button.sel,.ac button:hover{background:#FFF1F6}
+.ac button.etc{color:var(--ink2);font-size:14.5px;background:#FAF7FB}
+.ac button.etc em{font-style:normal;font-weight:900;color:var(--plum)}
+.ac .none{padding:12px 14px;font-size:14px;font-weight:700;color:var(--mute)}
+</style>
+</head>
+<body>
+<script>
+/* ═════════════ 여기부터 수정 ═════════════ */
+var APPLY = {
+  api: "https://script.google.com/macros/s/AKfycbxIFP0vOzKgDCdlqgVXE4TFBSo25e3q0sUjx-ljDAmJ_KjTDF7VoyhREtNRSbnSe7rf/exec",   // 구글 Apps Script 웹 앱 주소 (…/exec)
+  instagram: "https://www.instagram.com/busan_marketing_highschool/",
+  admit: [
+    {name:"특별전형", start:"2026-11-23 09:00", end:"2026-11-24 17:00"},
+    {name:"일반전형", start:"2026-11-30 09:00", end:"2026-12-01 17:00"}
+  ],
+  rounds: [   // 진로체험 차수 (date가 지나면 자동으로 신청 목록에서 빠짐)
+    {label:"2차", date:"2026-11-06", day:"금", tab:"진로체험 2차(11.6)",  info:""},
+    {label:"3차", date:"2026-11-14", day:"토", tab:"진로체험 3차(11.14)", info:""},
+    {label:"4차", date:"2026-11-21", day:"토", tab:"진로체험 4차(11.21)", info:""}
+  ],
+  photos: []  // 진로체험 사진 (예: "img/round1-1.jpg")
+};
+/* ═════════════ 여기까지 수정 ═════════════ */
+</script>
+
+<div class="kbar"><b>현장 접수</b><span>중3 학생 정보를 받아 대신 입력해요 · 접수 후 [다음 학생]을 누르면 학교 이름은 그대로 남아요</span></div>
+
+<header class="hero">
+  <div class="wrap">
+    <img class="logo" src="img/logo_h.png" alt="동성여자고등학교">
+    <div class="copy">
+      <h1><em>동성여고</em>로<br>오는 길</h1>
+      <p>2027 동성여자고등학교<br><small style="font-size:13px;color:var(--mute)">현 부산마케팅고등학교</small></p>
+      <div class="cd" id="cd"><small id="cd-l"></small><b id="cd-t"></b></div>
+    </div>
+    <img class="chr" src="img/wave.webp" alt="">
+  </div>
+</header>
+
+<div class="wrap"><button class="qtick" id="qtick" type="button"><b>실시간 Q&amp;A</b><span class="qt-in" id="qt-in"><span>선배·선생님이 직접 답해 줘요. 눌러서 보기 →</span></span></button></div>
+<nav class="tabs"><div class="wrap">
+  <button class="tab on" data-tab="consult">입학상담 신청</button>
+  <button class="tab" data-tab="career">진로체험 신청</button>
+  <button class="tab" data-tab="qa">Q&amp;A</button>
+  <button class="tab" data-tab="about">학교 소개</button>
+</div></nav>
+
+<main class="wrap">
+
+<!-- 입학상담 -->
+<section class="pane on" id="p-consult">
+  <h2>입학상담 신청</h2>
+  <p>남겨 주면 담당 선생님이 직접 연락드려요.</p>
+  <form class="form" data-type="입학상담" autocomplete="off" novalidate>
+    <div class="f sch"><label>중학교<i>*</i><small>두세 글자나 초성(ㅎㅇㄷ)으로 찾아요</small></label><input class="in" name="school" placeholder="학교 이름 검색" autocomplete="off" spellcheck="false"><span class="ok">✓</span><input type="hidden" name="gu"><div class="ac"></div><div class="sch-gu"></div></div>
+    <div class="f"><span class="lb">학년 · 반 · 번호<i>*</i></span><div class="row3">
+      <select class="in" name="grade_"><option value="3">3학년</option><option value="2">2학년</option><option value="1">1학년</option></select>
+      <input class="in" name="cls" inputmode="numeric" placeholder="반" autocomplete="off">
+      <input class="in" name="num" inputmode="numeric" placeholder="번호" autocomplete="off"></div></div>
+    <div class="f"><label>이름<i>*</i></label><input class="in" name="name" placeholder="이름" autocomplete="off"></div>
+    <div class="f"><label>연락처<i>*</i></label><input class="in" name="phone" type="tel" inputmode="tel" placeholder="010-0000-0000" autocomplete="off"></div>
+    <div class="f"><label>성적<small>선택 · 소수점 둘째 자리까지</small></label><input class="in" name="score" inputmode="decimal" maxlength="6" autocomplete="off">
+      <div class="tip">성적을 적어 주면 합격 가능성까지 함께 보는 자세한 1:1 입학상담을 받을 수 있어요.</div></div>
+    <div class="f"><span class="lb">동성여고에 지원할 생각이 있나요?<i>*</i></span><div class="opts">
+      <label class="opt"><input type="radio" name="intent" value="꼭 지원할 거예요"><span class="dot"></span>꼭 지원할 거예요</label>
+      <label class="opt"><input type="radio" name="intent" value="지원을 고민하고 있어요"><span class="dot"></span>지원을 고민하고 있어요</label>
+      <label class="opt"><input type="radio" name="intent" value="아직은 이야기만 들어 볼래요"><span class="dot"></span>아직은 이야기만 들어 볼래요</label></div></div>
+    <div class="f"><label>상담받고 싶은 내용<small>선택</small></label><textarea class="in" name="text" placeholder="예: 학과 선택, 전형 방법, 기숙사, 통학 등"></textarea></div>
+    <div class="agree" data-purpose="입학상담 연락 및 입학 안내"></div>
+    <input class="hp" name="website" tabindex="-1" autocomplete="off">
+    <div class="msg"></div>
+    <button class="go" type="submit">상담 신청하기</button>
+  </form>
+  <div class="done"><img src="img/wave.webp" alt=""><h3>상담 신청이 접수되었어요!</h3><p>담당 선생님이 곧 연락드릴게요.</p><button type="button" class="again">다음 학생 신청하기</button></div>
+</section>
+
+<!-- 진로체험 -->
+<section class="pane" id="p-career">
+  <h2>진로체험 신청</h2>
+  <p>동성여고에 직접 와서 학과 체험을 해 봐요.</p>
+  <div class="rounds" id="rounds"></div>
+  <form class="form" data-type="진로체험" autocomplete="off" novalidate>
+    <div class="f"><label>참가 차수<i>*</i></label><select class="in" name="round" id="round-sel"></select></div>
+    <div class="f sch"><label>중학교<i>*</i><small>두세 글자나 초성(ㅎㅇㄷ)으로 찾아요</small></label><input class="in" name="school" placeholder="학교 이름 검색" autocomplete="off" spellcheck="false"><span class="ok">✓</span><input type="hidden" name="gu"><div class="ac"></div><div class="sch-gu"></div></div>
+    <div class="f"><span class="lb">학년 · 반 · 번호<i>*</i></span><div class="row3">
+      <select class="in" name="grade_"><option value="3">3학년</option><option value="2">2학년</option><option value="1">1학년</option></select>
+      <input class="in" name="cls" inputmode="numeric" placeholder="반" autocomplete="off">
+      <input class="in" name="num" inputmode="numeric" placeholder="번호" autocomplete="off"></div></div>
+    <div class="f"><label>이름<i>*</i></label><input class="in" name="name" placeholder="이름" autocomplete="off"></div>
+    <div class="f"><label>연락처<i>*</i></label><input class="in" name="phone" type="tel" inputmode="tel" placeholder="010-0000-0000" autocomplete="off"></div>
+    <div class="f"><span class="lb">관심 있는 학과<i>*</i><small>여러 개 골라도 돼요</small></span><div class="chips">
+      <label class="opt chk" style="--c:var(--fin)"><input type="checkbox" name="dept" value="금융정보과"><span class="dot"></span><i></i>금융정보과</label>
+      <label class="opt chk" style="--c:var(--tou)"><input type="checkbox" name="dept" value="관광서비스과"><span class="dot"></span><i></i>관광서비스과</label>
+      <label class="opt chk" style="--c:var(--hea)"><input type="checkbox" name="dept" value="보건간호과"><span class="dot"></span><i></i>보건간호과</label>
+      <label class="opt chk" style="--c:var(--spo)"><input type="checkbox" name="dept" value="스포츠건강관리과"><span class="dot"></span><i></i>스포츠건강관리과</label></div></div>
+    <div class="f"><span class="lb">동성여고에 얼마나 관심 있나요?<i>*</i></span><div class="opts">
+      <label class="opt"><input type="radio" name="interest" value="무조건 지원할 거예요"><span class="dot"></span>무조건 지원할 거예요</label>
+      <label class="opt"><input type="radio" name="interest" value="고민 중이에요"><span class="dot"></span>고민 중이에요</label></div></div>
+    <div class="agree" data-purpose="진로체험 참가 확인 및 행사 안내"></div>
+    <input class="hp" name="website" tabindex="-1" autocomplete="off">
+    <div class="msg"></div>
+    <button class="go" type="submit">진로체험 신청하기</button>
+  </form>
+  <div class="done"><img src="img/uniform.webp" alt=""><h3>진로체험 신청이 접수되었어요!</h3><p>행사 전에 담당 선생님이 안내 연락을 드릴게요.</p><button type="button" class="again">다음 학생 신청하기</button></div>
+  <div class="sec2" id="gal-sec" style="display:none"><h2>지난 진로체험</h2><div class="gallery" id="gallery"></div></div>
+</section>
+
+<!-- Q&A -->
+<section class="pane" id="p-qa">
+  <h2>Q&amp;A</h2>
+  <p>선배·선생님이 직접 답해요. 실시간으로 올라와요.</p>
+  <div class="qa-box" id="qa-box"><div class="qa-in" id="qa-in"><div class="qa-empty">질문을 불러오는 중…</div></div></div>
+  <div class="qa-hint">누르고 있으면 멈춰요</div>
+  <div class="sec2">
+    <h2>질문 남기기</h2>
+    <p>답변이 달리면 위 목록에 <b>“해운대중 김○하”</b>처럼 이름 일부를 가려서 공개돼요.</p>
+    <form class="form" data-type="Q&A" autocomplete="off" novalidate>
+      <div class="f sch"><label>중학교<i>*</i><small>두세 글자나 초성(ㅎㅇㄷ)으로 찾아요</small></label><input class="in" name="school" placeholder="학교 이름 검색" autocomplete="off" spellcheck="false"><span class="ok">✓</span><input type="hidden" name="gu"><div class="ac"></div><div class="sch-gu"></div></div>
+      <div class="f"><label>이름<i>*</i></label><input class="in" name="name" placeholder="이름" autocomplete="off"></div>
+      <div class="f"><label>질문<i>*</i></label><textarea class="in" name="text" placeholder="동성여고에 대해 궁금한 걸 뭐든 물어보세요!"></textarea></div>
+      <input class="hp" name="website" tabindex="-1" autocomplete="off">
+      <div class="msg"></div>
+      <button class="go" type="submit">질문 보내기</button>
+    </form>
+    <div class="done"><img src="img/think.webp" alt=""><h3>질문이 접수되었어요!</h3><p>답변이 달리면 Q&amp;A 목록에 올라와요.</p><button type="button" class="again">질문 하나 더 하기</button></div>
+  </div>
+</section>
+
+<!-- 학교 소개 -->
+<section class="pane" id="p-about">
+  <h2>동성여고는요</h2>
+  <p>1학년은 다 함께, 2학년 때 나에게 맞는 학과를 골라요.</p>
+  <div class="depts">
+    <div class="dp" style="--c:var(--fin)"><b>금융정보과</b><span>은행·공공기관으로 가는 가장 빠른 길</span></div>
+    <div class="dp" style="--c:var(--tou)"><b>관광서비스과</b><span>매달 내가 만든 커피·디저트를 파는 학과</span></div>
+    <div class="dp" style="--c:var(--hea)"><b>보건간호과</b><span>간호학과로 가는 가장 확실한 지름길</span></div>
+    <div class="dp" style="--c:var(--spo)"><b>스포츠건강관리과</b><span>부산·경남 유일, 운동으로 여는 진로</span></div>
+  </div>
+  <div class="facts" id="facts"></div>
+  <a class="insta" id="insta" target="_blank" rel="noopener">📷 학교 인스타그램 보러 가기</a>
+</section>
+</main>
+
+<div class="foot">동성여자고등학교 (현 부산마케팅고등학교)<br>배움으로 이루고 세상으로 비상하라!</div>
+
+<script>
+(function(){
+var $=function(s,r){return (r||document).querySelector(s)}, $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+var Q=new URLSearchParams(location.search), KIOSK=Q.get("kiosk")==="1";
+if(KIOSK)document.body.classList.add("kiosk"); if(KIOSK&&window.innerWidth>=700&&window.self!==window.top)document.documentElement.style.zoom="1.3";
+var WK=["일","월","화","수","목","금","토"];
+function pd(s){var a=s.split(/[- :]/);return new Date(+a[0],+a[1]-1,+a[2],+(a[3]||0),+(a[4]||0));}
+function md(d){return (d.getMonth()+1)+". "+d.getDate()+".("+WK[d.getDay()]+")";}
+
+/* 탭 */
+function show(t){ $$(".tab").forEach(function(b){b.classList.toggle("on",b.dataset.tab===t)}); $$(".pane").forEach(function(p){p.classList.toggle("on",p.id==="p-"+t)}); if(t==="qa")loadQA(); if(!KIOSK)history.replaceState(null,"","#"+t); }
+$$(".tab").forEach(function(b){b.onclick=function(){show(b.dataset.tab); window.scrollTo({top:$(".tabs").offsetTop,behavior:"smooth"});}});
+var first=Q.get("tab")||(location.hash||"").slice(1); if(["consult","career","qa","about"].indexOf(first)>=0)show(first);
+
+/* 원서 카운트다운 */
+function pad(n){return (n<10?"0":"")+n}
+function tick(){
+  var now=new Date(), L=APPLY.admit, S=null;
+  for(var i=0;i<L.length;i++){ var st=pd(L[i].start), en=pd(L[i].end); if(now<st){S={k:"w",a:L[i],t:st};break;} if(now<en){S={k:"o",a:L[i],t:en};break;} }
+  if(!S){ $("#cd-l").textContent="2027. 3. 2."; $("#cd-t").textContent="우리, 여기서 만나"; return; }
+  var s=Math.floor((S.t-now)/1000), d=Math.floor(s/86400); s-=d*86400; var h=Math.floor(s/3600); s-=h*3600; var m=Math.floor(s/60); s-=m*60;
+  $("#cd-l").textContent=S.a.name+(S.k==="w"?" 접수까지":" 마감까지");
+  $("#cd-t").textContent=(d?d+"일 ":"")+pad(h)+":"+pad(m)+":"+pad(s);
+}
+tick(); setInterval(tick,1000);
+
+/* 진로체험 차수 */
+var today=new Date(); today=new Date(today.getFullYear(),today.getMonth(),today.getDate());
+var open=APPLY.rounds.filter(function(r){return pd(r.date)>=today});
+$("#rounds").innerHTML=APPLY.rounds.map(function(r){ var d=pd(r.date), past=d<today, dd=Math.round((d-today)/864e5);
+  return '<div class="rd'+(past?' past':'')+'"><b>'+r.label+'</b><div><span>'+md(d)+'</span>'+(r.info?'<small>'+r.info+'</small>':'')+'</div><em>'+(past?'마감':(dd===0?'오늘':'D-'+dd))+'</em></div>'; }).join("");
+$("#round-sel").innerHTML=open.length?'<option value="">차수를 골라 주세요</option>'+open.map(function(r){return '<option value="'+r.tab+'">'+r.label+' · '+md(pd(r.date))+(r.info?' · '+r.info:'')+'</option>'}).join(""):'<option value="">지금은 신청할 수 있는 차수가 없어요</option>';
+if(APPLY.photos&&APPLY.photos.length){ $("#gal-sec").style.display=""; $("#gallery").innerHTML=APPLY.photos.map(function(p){return '<img src="'+p+'" alt="" loading="lazy">'}).join(""); }
+
+/* 개인정보 동의 */
+$$(".agree").forEach(function(a){
+  a.innerHTML='<label class="opt chk"><input type="checkbox" name="agree"><span class="dot"></span>개인정보 수집·이용에 동의해요 <i style="font-style:normal;color:var(--pink)">*</i></label>'+
+  '<details><summary>자세히 보기</summary><dl><dt>수집 항목</dt><dd>중학교, 학년·반·번호, 이름, 연락처'+(a.closest("form").dataset.type==="입학상담"?', 성적(입력한 경우만)':', 관심 학과')+'</dd>'+
+  '<dt>이용 목적</dt><dd>'+a.dataset.purpose+'</dd><dt>보관 기간</dt><dd>2027학년도 입학전형 종료 시까지 보관 후 파기</dd>'+
+  '<dt>동의 거부</dt><dd>동의하지 않을 수 있으며, 이 경우 신청이 어려워요</dd></dl></details>';
+});
+
+/* 신청 보내기 */
+function val(f,n){ var el=f.elements[n]; if(!el)return ""; if(el.length&&el[0]&&el[0].type==="checkbox") return $$('[name="'+n+'"]:checked',f).map(function(x){return x.value}).join(", "); if(el.length&&el[0]&&el[0].type==="radio"){ var c=$('[name="'+n+'"]:checked',f); return c?c.value:""; } return (el.value||"").trim(); }
+$$('input[name="score"]').forEach(function(el){ el.addEventListener("input",function(){ var v=el.value.replace(/[^0-9.]/g,""), i=v.indexOf("."); if(i>=0)v=v.slice(0,i+1)+v.slice(i+1).replace(/\./g,"").slice(0,2); el.value=v; }); });
+$$(".form").forEach(function(f){
+  f.addEventListener("input",function(e){ if(e.target.classList)e.target.classList.remove("err"); $(".msg",f).textContent=""; });
+  f.addEventListener("submit",function(e){
+    e.preventDefault();
+    var type=f.dataset.type, d={type:type,website:val(f,"website")}, need=[];
+    ["school","gu","name","text","grade_","cls","num","phone","score","intent","round","dept","interest"].forEach(function(n){ if(f.elements[n]) d[n]=val(f,n); });
+    if(type==="Q&A") need=["school","name","text"];
+    else { need=["school","cls","num","name","phone"]; if(type==="입학상담")need.push("intent"); else need.push("round","dept","interest"); }
+    var sf=$(".f.sch",f); if(d.school&&sf&&!sf.classList.contains("picked")&&!sf.dataset.manual){ if(!SCH_UI.auto(f)){ f.elements.school.classList.add("err"); $(".msg",f).textContent="학교를 목록에서 골라 주세요. 목록에 없으면 '목록에 없어요'를 눌러요."; SCH_UI.open(f); return; } d.school=val(f,"school"); d.gu=val(f,"gu"); }
+    var miss=need.filter(function(n){return !d[n]});
+    miss.forEach(function(n){ var el=f.elements[n]; if(el&&!el.length&&el.classList)el.classList.add("err"); });
+    if(d.score&&(!/^\d{1,3}(\.\d{1,2})?$/.test(d.score)||parseFloat(d.score)>100)){ f.elements.score.classList.add("err"); $(".msg",f).textContent="성적은 숫자로 적어 주세요. (소수점 둘째 자리까지)"; return; }
+    if(d.phone&&!/^0\d{1,2}-?\d{3,4}-?\d{4}$/.test(d.phone.replace(/\s/g,""))) { miss.push("phone"); f.elements.phone.classList.add("err"); }
+    if(type!=="Q&A"){ d.agree=!!(f.elements.agree&&f.elements.agree.checked); if(!d.agree){ $(".msg",f).textContent="개인정보 수집·이용에 동의해 주세요."; return; } }
+    if(miss.length){ $(".msg",f).textContent=miss.indexOf("phone")>=0&&miss.length===1?"연락처를 010-0000-0000처럼 적어 주세요.":"* 표시된 칸을 모두 채워 주세요."; return; }
+    if(!APPLY.api){ $(".msg",f).textContent="아직 접수 주소가 연결되지 않았어요. (선생님께 알려 주세요)"; return; }
+    if(navigator.onLine===false){ $(".msg",f).textContent="인터넷 연결을 확인해 주세요."; return; }
+    var btn=$(".go",f); btn.disabled=true; btn.textContent="보내는 중…";
+    fetch(APPLY.api,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(d)})
+      .then(function(){ f.style.display="none"; var dn=f.nextElementSibling; dn.classList.add("on"); dn.scrollIntoView({behavior:"smooth",block:"center"});
+        })
+      .catch(function(){ $(".msg",f).textContent="전송에 실패했어요. 인터넷 연결을 확인하고 다시 눌러 주세요."; })
+      .then(function(){ btn.disabled=false; btn.textContent=btn.dataset.label; });
+  });
+  $(".go",f).dataset.label=$(".go",f).textContent;
+  var dn=f.nextElementSibling; $(".again",dn).onclick=function(){ reset(f,dn); };
+  if(!KIOSK&&f.dataset.type!=="Q&A") $(".again",dn).style.display="none";
+});
+function reset(f,dn){ clearTimeout(dn._t); var sc=f.elements.school?f.elements.school.value:"", sg=f.elements.gu?f.elements.gu.value:"", sf=$(".f.sch",f), st=sf?[sf.className,sf.dataset.manual||"",$(".sch-gu",sf).textContent]:null; f.reset(); if(KIOSK&&f.elements.school){ f.elements.school.value=sc; f.elements.gu.value=sg; if(st){ sf.className=st[0]; if(st[1])sf.dataset.manual=st[1]; $(".sch-gu",sf).textContent=st[2]; } } else if(sf){ sf.classList.remove("picked"); delete sf.dataset.manual; $(".sch-gu",sf).textContent=""; } $$(".err",f).forEach(function(x){x.classList.remove("err")}); dn.classList.remove("on"); f.style.display=""; var p=f.closest(".pane"); window.scrollTo({top:KIOSK?0:$(".tabs").offsetTop,behavior:"smooth"}); }
+
+/* Q&A 목록 (답변 달린 질문만, 자동으로 천천히 올라감) */
+var qaLoaded=0, QA=[], qtI=0;
+function ticker(){ var el=$("#qt-in"); if(!QA.length)return; var x=QA[qtI%QA.length]; qtI++;
+  el.innerHTML='<span><em>'+esc(x.q)+'</em><i>'+esc(x.a)+'</i></span>'; }
+setInterval(ticker,4500);
+$("#qtick").onclick=function(){ show("qa"); window.scrollTo({top:$(".tabs").offsetTop,behavior:"smooth"}); };
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function loadQA(){
+  if(Date.now()-qaLoaded<60000)return; qaLoaded=Date.now();
+  var box=$("#qa-in");
+  if(!APPLY.api){ box.className="qa-in"; box.innerHTML='<div class="qa-empty">곧 첫 질문과 답변이 올라와요!<br>궁금한 걸 아래에서 먼저 물어보세요.</div>'; return; }
+  fetch(APPLY.api+(APPLY.api.indexOf("?")<0?"?":"&")+"t="+Date.now()).then(function(r){return r.json()}).then(function(j){
+    var it=(j&&j.items)||[]; var fresh=!QA.length; QA=it; if(fresh&&it.length)ticker();
+    if(!it.length){ box.className="qa-in"; box.innerHTML='<div class="qa-empty">아직 답변이 달린 질문이 없어요.<br>첫 질문의 주인공이 되어 보세요!</div>'; return; }
+    var html=it.map(function(x){return '<div class="qa"><div class="w">'+esc(x.who||"")+'</div><div class="q">'+esc(x.q)+'</div><div class="a">'+esc(x.a)+'</div></div>'}).join("");
+    var roll=it.length>=3; box.innerHTML=roll?html+html:html; box.className="qa-in"+(roll?" roll":""); box.style.setProperty("--dur",Math.max(20,it.length*8)+"s");
+  }).catch(function(){ qaLoaded=0; box.className="qa-in"; box.innerHTML='<div class="qa-empty">인터넷에 연결되면 질문과 답변을 볼 수 있어요.</div>'; });
+}
+var qb=$("#qa-box"); ["touchstart","mousedown"].forEach(function(ev){qb.addEventListener(ev,function(){qb.classList.add("hold")},{passive:true})}); ["touchend","mouseup","mouseleave"].forEach(function(ev){qb.addEventListener(ev,function(){qb.classList.remove("hold")})});
+setInterval(function(){ qaLoaded=0; loadQA(); },120000);
+if(!KIOSK) loadQA();
+
+/* 학교 소개 */
+$("#insta").href=APPLY.instagram;
+$("#facts").innerHTML=APPLY.admit.map(function(a){var s=pd(a.start),e=pd(a.end);return '<div class="fact"><b>'+a.name+'</b> 원서 접수 · '+md(s)+' ~ '+md(e)+'</div>'}).join("")+'<div class="fact">입학식 <b>2027. 3. 2.</b> · 1학년 공통모집, 2학년 때 학과 선택</div>';
+
+/* ── 학교 검색 (부산 중학교 173곳 · 나이스 교육정보 개방 포털 2026-10-27 기준) ── */
+var SCH=("가락중학교|강서구,가람중학교|북구,가야여자중학교|부산진구,감만중학교|남구,감천중학교|사하구,개금여자중학교|부산진구,개림중학교|부산진구,거성중학교|연제구,거제여자중학교|연제구,건국중학교|사하구,경남여자중학교|동구,경남중학교|서구,경일중학교|강서구,광무여자중학교|부산진구,광안중학교|수영구,구남중학교|북구,구서여자중학교|금정구,구포중학교|북구,금곡중학교|북구,금명중학교|북구,금사중학교|금정구,금양중학교|금정구,금정중학교|금정구,기장중학교|기장군,낙동중학교|강서구,남도여자중학교|영도구,남산중학교|금정구,남일중학교|동래구,남천중학교|남구,녹산중학교|강서구,다대중학교|사하구,다선중학교|사하구,다송중학교|사하구,당리중학교|사하구,대동중학교|사하구,대신여자중학교|서구,대연중학교|남구,대저중학교|강서구,대천리중학교|북구,대천중학교|남구,대청중학교|기장군,덕명여자중학교|부산진구,덕문중학교|강서구,덕원중학교|중구,덕천중학교|북구,덕포여자중학교|사상구,동래여자중학교|금정구,동래중학교|동래구,동백중학교|해운대구,동수영중학교|수영구,동신중학교|동래구,동아중학교|수영구,동양중학교|부산진구,동의중학교|부산진구,동주여자중학교|사하구,동주중학교|사상구,동평여자중학교|부산진구,동평중학교|부산진구,동항중학교|남구,동해중학교|동래구,동현중학교|금정구,두송중학교|사하구,만덕중학교|북구,망미중학교|수영구,명문중학교|강서구,명지중학교|강서구,명진중학교|북구,명호중학교|강서구,모동중학교|사상구,모라중학교|사상구,모전중학교|기장군,문현여자중학교|남구,반송여자중학교|해운대구,반송중학교|해운대구,반안중학교|해운대구,반여중학교|해운대구,백양중학교|북구,부곡여자중학교|금정구,부곡중학교|금정구,부산개성중학교|부산진구,부산국제중학교|부산진구,부산남중학교|영도구,부산내성중학교|동래구,부산대신중학교|서구,부산동여자중학교|동구,부산동중학교|부산진구,부산서중학교|동구,부산수영중학교|수영구,부산여자중학교|서구,부산영선중학교|영도구,부산예술중학교|금정구,부산중앙여자중학교|서구,부산중앙중학교|기장군,부산중학교|동구,부산진여자중학교|부산진구,부산진중학교|부산진구,부산체육중학교|영도구,부흥중학교|해운대구,분포중학교|남구,브니엘예술중학교|금정구,사직여자중학교|동래구,사직중학교|동래구,사하중학교|사하구,삼성중학교|사하구,상당중학교|해운대구,서면중학교|부산진구,석포여자중학교|남구,선화여자중학교|동구,성동중학교|남구,센텀중학교|해운대구,송도중학교|서구,신곡중학교|해운대구,신덕중학교|북구,신도중학교|해운대구,신라중학교|사상구,신선중학교|영도구,신정중학교|기장군,신호중학교|강서구,안락중학교|동래구,양덕여자중학교|북구,양동여자중학교|부산진구,양운중학교|해운대구,엄궁중학교|사상구,여명중학교|동래구,연산중학교|연제구,연일중학교|연제구,연제중학교|연제구,연천중학교|연제구,영남중학교|사하구,영도제일중학교|영도구,오륙도중학교|남구,오션중학교|강서구,온천중학교|동래구,용문중학교|남구,용수중학교|북구,용호중학교|남구,유락여자중학교|동래구,이사벨중학교|연제구,인지중학교|해운대구,일광중학교|기장군,장림여자중학교|사하구,장산중학교|해운대구,장안중학교|기장군,장전중학교|금정구,장평중학교|사하구,재송여자중학교|해운대구,재송중학교|해운대구,정관중학교|기장군,정원중학교|기장군,주감중학교|사상구,주례여자중학교|사상구,주례중학교|사상구,지사중학교|강서구,초연중학교|부산진구,초읍중학교|부산진구,초장중학교|서구,충렬중학교|동래구,태종대중학교|영도구,토현중학교|연제구,하남중학교|사하구,하단중학교|사하구,학산여자중학교|동래구,학장중학교|사상구,한바다중학교|수영구,항도중학교|부산진구,해강중학교|해운대구,해동중학교|영도구,해연중학교|남구,해운대여자중학교|해운대구,해운대중학교|해운대구,혜화여자중학교|동래구,화명중학교|북구,화신중학교|북구").split(",").map(function(x){ var p=x.split("|"); return {n:p[0],g:p[1]}; });
+var SCH_UI=(function(){
+  function cho(ch){ var c=ch.charCodeAt(0)-0xAC00; if(c<0||c>11171)return ch; return "ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ"[Math.floor(c/588)]; }
+  function isJamo(ch){ return /[ㄱ-ㅎ]/.test(ch); }
+  function norm(q){ return q.replace(/\s/g,"").replace(/여중$/,"여자중").replace(/중(학교)?$/,""); }
+  function hit(name,q){ // q 글자마다: 초성이면 초성 비교, 아니면 그대로 비교 → 이어진 부분 찾기
+    for(var i=0;i+q.length<=name.length;i++){ var ok=true; for(var j=0;j<q.length;j++){ var a=name[i+j], b=q[j]; if(isJamo(b)?cho(a)!==b:a!==b){ok=false;break;} } if(ok)return [i,i+q.length]; } return null; }
+  function find(raw){ var q=norm(raw); if(!q)return []; var out=[];
+    SCH.forEach(function(s){ var h=hit(s.n,q); if(h)out.push({s:s,h:h,score:(h[0]===0?0:1)+s.n.length/100}); });
+    out.sort(function(a,b){return a.score-b.score}); return out.slice(0,8); }
+  function esc(x){return String(x).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+  function box(f){ return $(".f.sch",f); }
+  function pick(f,s){ var b=box(f), inp=f.elements.school; inp.value=s.n; f.elements.gu.value=s.g; b.classList.add("picked"); delete b.dataset.manual; $(".sch-gu",b).textContent="부산 "+s.g; inp.classList.remove("err"); close(f); }
+  function manual(f){ var b=box(f), inp=f.elements.school; f.elements.gu.value="기타(직접 입력)"; b.classList.remove("picked"); b.dataset.manual="1"; $(".sch-gu",b).textContent="직접 입력한 학교예요"; inp.classList.remove("err"); close(f); }
+  function close(f){ $(".ac",box(f)).classList.remove("on"); }
+  function open(f){ var b=box(f), ac=$(".ac",b), v=f.elements.school.value.trim(), L=find(v); b._L=L; b._i=-1;
+    if(!v){ ac.classList.remove("on"); return; }
+    ac.innerHTML=(L.length?L.map(function(r,i){ var n=r.s.n; return '<button type="button" data-i="'+i+'">'+'<span>'+esc(n.slice(0,r.h[0]))+'<b>'+esc(n.slice(r.h[0],r.h[1]))+'</b>'+esc(n.slice(r.h[1]))+'</span><small>'+r.s.g+'</small></button>'; }).join(""):'<div class="none">부산 중학교 목록에서 찾지 못했어요</div>')+
+      '<button type="button" class="etc" data-i="m"><span>목록에 없어요 · <em>‘'+esc(v)+'’</em> 그대로 쓰기</span></button>';
+    ac.classList.add("on"); }
+  function auto(f){ var v=norm(f.elements.school.value.trim()); if(!v)return false; var m=SCH.filter(function(s){ return norm(s.n)===v; }); if(m.length===1){ pick(f,m[0]); return true; } return false; }
+  $$(".f.sch").forEach(function(b){
+    var f=b.closest("form"), inp=$(".in",b), ac=$(".ac",b);
+    inp.addEventListener("input",function(){ b.classList.remove("picked"); delete b.dataset.manual; f.elements.gu.value=""; $(".sch-gu",b).textContent=""; open(f); });
+    inp.addEventListener("focus",function(){ if(inp.value.trim()&&!b.classList.contains("picked"))open(f); });
+    inp.addEventListener("keydown",function(e){ if(!ac.classList.contains("on"))return; var btns=$$("button",ac);
+      if(e.key==="ArrowDown"||e.key==="ArrowUp"){ e.preventDefault(); b._i=(b._i+(e.key==="ArrowDown"?1:-1)+btns.length)%btns.length; btns.forEach(function(x,i){x.classList.toggle("sel",i===b._i)}); }
+      else if(e.key==="Enter"){ e.preventDefault(); var t=btns[b._i<0?0:b._i]; if(t)t.click(); }
+      else if(e.key==="Escape")close(f); });
+    ac.addEventListener("mousedown",function(e){ e.preventDefault(); });
+    ac.addEventListener("click",function(e){ var t=e.target.closest("button"); if(!t)return; if(t.dataset.i==="m")manual(f); else pick(f,b._L[+t.dataset.i].s); });
+    inp.addEventListener("blur",function(){ setTimeout(function(){ close(f); if(!b.classList.contains("picked")&&!b.dataset.manual)auto(f); },120); });
+  });
+  return {open:open,auto:auto};
+})();
+})();
+</script>
+</body>
+</html>
